@@ -35,16 +35,26 @@ $(function() {
             expect(bodyList).toContain('menu-hidden');
         });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-//        it('toggles visibility when clicked', function() {
-//            if (body.classList.contains('menu-hidden')) {
-//                expect(body.)
-//            }
-//        });
+        //Test whether the menu toggles open and closed when the hamburger icon is clicked.
+        it('toggles visibility when clicked', function() {
+//            hamburger.onclick = function () {
+//                if (bodyList.contains('menu-hidden')) {
+//                    expect(bodyList).not.toContain('menu-hidden');
+//                } else {
+//                    expect(bodyList).toContain('menu-hidden');
+//                }
+//            }; 
+            
+            if (bodyList.contains('menu-hidden')) {
+                hamburger.onclick = function () {
+                    expect(bodyList).not.toContain('menu-hidden');
+                };
+            } else {
+                hamburger.onclick = function () {
+                    expect(bodyList).toContain('menu-hidden');
+                };
+            }
+        });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
 
