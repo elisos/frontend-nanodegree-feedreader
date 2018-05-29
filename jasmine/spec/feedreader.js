@@ -37,33 +37,33 @@ $(function() {
 
         //Test whether the menu toggles open and closed when the hamburger icon is clicked.
         it('toggles visibility when clicked', function() {
-//            hamburger.onclick = function () {
-//                if (bodyList.contains('menu-hidden')) {
-//                    expect(bodyList).not.toContain('menu-hidden');
-//                } else {
-//                    expect(bodyList).toContain('menu-hidden');
-//                }
-//            }; 
-            
-            if (bodyList.contains('menu-hidden')) {
-                hamburger.onclick = function () {
-                    expect(bodyList).not.toContain('menu-hidden');
-                };
-            } else {
-                hamburger.onclick = function () {
-                    expect(bodyList).toContain('menu-hidden');
-                };
-            }
+//           
+//            if (bodyList.contains('menu-hidden')) {
+//                hamburger.trigger("click");
+//                expect(bodyList).not.toContain('menu-hidden');
+//                };
+//            } else {
+//                hamburger.trigger("click");
+//                expect(bodyList).toContain('menu-hidden');
+//                };
+//            }
         });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
-
-        /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
+    describe('Initial Entries', function() {
+            
+        //Once the loadFeed function has finished runnning
+        beforeEach(function(done){
+            loadFeed(0, done);
+        });
+        
+        //there is at least one item in the feed.
+        it('container is not empty', function(done) {
+            let entries = document.getElementsByClassName('entry');
+            expect(entries).not.toBe(0);
+            done();
+        });
+    });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
