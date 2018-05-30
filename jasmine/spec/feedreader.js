@@ -37,6 +37,7 @@ $(function() {
         });
 
         //Test whether the menu toggles open and closed when the hamburger icon is clicked.
+        //idea from here: https://stackoverflow.com/questions/38879599/how-do-i-trigger-a-click-event-in-a-jasmine-unit-test-for-an-angular-directive
         it('toggles visibility when clicked', function() {
            
             //if the menu icon is clicked once, the menu should appear
@@ -51,7 +52,7 @@ $(function() {
    
     describe('Initial Entries', function() {
             
-        //Once the loadFeed function has finished runnning
+        //Once the loadFeed function has finished running
         beforeEach(function(done){
             loadFeed(0, done);
         });
@@ -69,18 +70,26 @@ $(function() {
 //         * by the loadFeed function that the content actually changes.
 //         * Remember, loadFeed() is asynchronous.
 //         */
-                
-        //Once the loadFeed function has finished runnning
-        beforeEach(function(done){
-            loadFeed(0, done);
-        });
+            let content1,
+                content2;
         
-        it('feed content changes', function(done) {
-            let entries = document.getElementsByClassName('entry');
-            let content = entries.innerHTML;
-            expect(content).not.toBe(content);
-            done();
+        beforeEach(function(done){
+            //Once the loadFeed function has finished runnning once, collect content
+            loadFeed(0, function() {
+                content1 = document.querySelector('.feed').innerHTML;
+            //collect content again after loading the second time
+                    loadFeed(1, function() {
+                    content2 = document.querySelector('.feed').innerHTML;
+                    done();
+                    });
+            });
         });
+
+        
+        it('feed content changes on load', function(done) {
+            expect(content1).not.toBe(content2);
+            done();
+        });        
     });
         
 }());
