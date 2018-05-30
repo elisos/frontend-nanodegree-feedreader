@@ -29,6 +29,7 @@ $(function() {
         const body = document.body;
         const bodyList = body.classList;
         const hamburger = document.getElementsByClassName('menu-icon-link');
+        const hambIcon = $('.menu-icon-link');
         
         //Test whether the menu is hidden by default
         it('is hidden by default', function() {
@@ -37,19 +38,17 @@ $(function() {
 
         //Test whether the menu toggles open and closed when the hamburger icon is clicked.
         it('toggles visibility when clicked', function() {
-//           
-//            if (bodyList.contains('menu-hidden')) {
-//                hamburger.trigger("click");
-//                expect(bodyList).not.toContain('menu-hidden');
-//                };
-//            } else {
-//                hamburger.trigger("click");
-//                expect(bodyList).toContain('menu-hidden');
-//                };
-//            }
+           
+            //if the menu icon is clicked once, the menu should appear
+                hambIcon.click();
+                expect(bodyList).not.toContain('menu-hidden');
+            //if the icon is clicked again, the menu should disappear
+                hambIcon.click();
+                expect(bodyList).toContain('menu-hidden');
+        
         });
     });
-    /* TODO: Write a new test suite named "Initial Entries" */
+   
     describe('Initial Entries', function() {
             
         //Once the loadFeed function has finished runnning
@@ -65,10 +64,23 @@ $(function() {
         });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+    describe('New Feed Selection', function() {
+//        * TODO: Write a test that ensures when a new feed is loaded
+//         * by the loadFeed function that the content actually changes.
+//         * Remember, loadFeed() is asynchronous.
+//         */
+                
+        //Once the loadFeed function has finished runnning
+        beforeEach(function(done){
+            loadFeed(0, done);
+        });
+        
+        it('feed content changes', function(done) {
+            let entries = document.getElementsByClassName('entry');
+            let content = entries.innerHTML;
+            expect(content).not.toBe(content);
+            done();
+        });
+    });
+        
 }());
